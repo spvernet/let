@@ -11,6 +11,7 @@
         "symfony/yaml": "*"
     },
     "require-dev": {
+        "symfony/browser-kit": "*",
         "symfony/dotenv": "*",
         "symfony/phpunit-bridge": "*"
     },

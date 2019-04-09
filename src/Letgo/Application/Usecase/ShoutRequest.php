@@ -21,7 +21,7 @@ class ShoutRequest
      * @param string $username
      * @param int $limit
      */
-    public function __construct(string $username, int $limit)
+    public function __construct(string $username, ?int $limit)
     {
         $this->username = $username;
         $this->limit = $limit;

@@ -1,7 +1,7 @@
 # Letgo Tech Test 
 
 
-##How to execute this project
+## How to execute this project
 First clone the repository and go into the folder:
 ```
 git clone https://github.com/spvernet/let
@@ -35,7 +35,7 @@ To try the api just send a GET to the:
 ```
 api.letgo.com.devel/shout/realDonaldTrump/?limit=4
 ```
-##Testing
+## Testing
 
 For execute the unit test, just go inside the folder project and execute:
 ```

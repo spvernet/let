@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:1.13.8-alpine
+    container_name: api.nginx
+    links:
+      - php-fpm-api
+    volumes:
+      - "./:/app:cached"
+      - "./docker/devel/nginx/api.letgo.com.devel.conf:/etc/nginx/conf.d/api.letgo.com.devel.conf:cached"
+      - "./var/log/nginx:/var/log/nginx:cached"
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      letgo_net:
+        ipv4_address: 172.19.0.2
+    depends_on:
+      - php-fpm-api
+
+  php-fpm-api:
+    build: docker/devel/php-fpm
+    container_name: letgo.api
+    volumes:
+      - ".:/app:cached"
+      - "~/.ssh/id_rsa:/root/.ssh/id_rsa:cached"
+    networks:
+      letgo_net:
+        ipv4_address: 172.19.0.3
+    extra_hosts:
+      - "docker.host:${DOCKER_HOST_IP}"
+
+  redis:
+    image: redis:alpine
+    container_name: letgo.redis
+    ports:
+      - "6379:6379"
+    networks:
+      letgo_net:
+        ipv4_address: 172.19.0.4
+
+networks:
+  letgo_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/24

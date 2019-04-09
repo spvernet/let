@@ -26,5 +26,13 @@ services:
         resource: '../src/Letgo/Infrastructure/Controller'
         tags: ['controller.service_arguments']
 
+    App\Letgo\Infrastructure\Redis\TweetRepositoryInRedis:
+        class: App\Letgo\Infrastructure\Redis\TweetRepositoryInRedis
+        arguments:
+            - '%redis.host%'
+            - '%redis.port%'
+            - '%redis.timeout%'
+            - '%redis.databaseIndex%'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -31,18 +31,14 @@ class ShoutService
         $response = [];
         $tweets = $this->cache->getCache($username, $limit);
         if (!$tweets) {
-            //die(var_dump('aquiii'));
             $tweets = $this->repo->searchByUserName($username, $limit);
-            $this->cache->setCache($username, $limit, $tweets);
-            die(var_dump('aquiii'));
+            foreach ($tweets as $tweet) {
+                $response[] = mb_strtoupper(rtrim($tweet->getText(),".")."!");
+            }
+            $this->cache->setCache($username, $limit, $response);
+            return $response;
         }
-
-        foreach ($tweets as $tweet) {
-
-            $response[] = mb_strtoupper(rtrim($tweet->getText(),".")."!");
-        }
-
-        return $response;
+        return json_decode($tweets);
     }
 
 

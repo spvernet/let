@@ -9,7 +9,7 @@ use App\Letgo\Domain\Model\Tweet\TweetRepositoryCache;
 class TweetRepositoryInRedis implements TweetRepositoryCache
 {
 
-    const TTL = 600;
+    const TTL = 60;
     /** @var \Redis */
     private $redis;
 

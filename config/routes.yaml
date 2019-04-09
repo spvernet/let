@@ -1,0 +1,4 @@
+shout:
+    path: /shout/{username}
+    controller: App\Letgo\Infrastructure\Controller\ShoutController::index
+

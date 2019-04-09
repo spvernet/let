@@ -10,6 +10,9 @@ use App\Letgo\Domain\Exception\LimitException;
 class ShoutRequest
 {
 
+    const LIMIT_MAX = 10;
+    const LIMIT_MIN = 1;
+
     /** @var string $username */
     private $username;
 
@@ -32,7 +35,7 @@ class ShoutRequest
         if (empty($this->username)) {
             throw new EmptyNameException('empty tweet name');
         }
-        if(empty($this->limit) || $this->limit<1 || $this->limit>10){
+        if(empty($this->limit) || $this->limit<self::LIMIT_MIN || $this->limit>self::LIMIT_MAX){
             throw new LimitException('the field limit is missing or not in correct ranges (1 - 10)');
         }
 
